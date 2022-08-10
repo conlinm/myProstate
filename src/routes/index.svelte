@@ -26,12 +26,12 @@
     }
     .button-primary {
         width: 100%;
-        background-color: #FF7F00;
-        border: 0.1rem solid #FF7F00;
+        background-color: #2e6adb;
+        border: 0.1rem solid #2e6adb;
     }
     .button-outline {
         width: 100%;
-        border: 0.1rem solid #FF7F00;
-        color: #FF7F00;
+        border: 0.1rem solid #2e6adb;
+        color: #2e6adb;
     }
 </style>

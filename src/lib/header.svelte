@@ -12,10 +12,11 @@
        <input type ='checkbox' class = 'menu-toggle' id ='menu-toggle' bind:this={myCheckbox}>
       <nav class= 'header'>
           <ul>
+            <li on:click={handleClick}><a href='/home'>Home</a></li>
               <li on:click={handleClick}><a href='/labs'>Lab Values</a></li>
-              <li on:click={handleClick}><a href='/topathletes'>Doctor Visits</a></li>
-              <li on:click={handleClick}><a href='/create'>Procedures</a></li>
-              <li on:click={handleClick}><a href='/pr'>Pathology Results</a></li>
+              <li on:click={handleClick}><a href='/visits'>Doctor Visits</a></li>
+              <li on:click={handleClick}><a href='/procedures'>Procedures</a></li>
+              <!-- <li on:click={handleClick}><a href='/pr'>Pathology Results</a></li> -->
       </ul>
       </nav>
       <label for='menu-toggle' class='menu-nav-toggle'>

@@ -1,42 +1,39 @@
 <script >
-    export let labs;
-    export let lab_id;
-     export let lab_name;
-     export let lab_value;
-     export let lab_date;
+    export let procedures;
+    export let procedure_id;
+     export let procedure_name;
+     export let procedure_date;
      export let user_id;
+     export let notes;
  
-     export let labIDField;
+     export let procedureIDField;
      export let userIDField;
-     export let labDateField;
-     export let labNameField;
-     export let labValueField;
+     export let procedureDateField;
+     export let procedureNameField;
      export let notesField;
  
  
-     function createNew(lab){
-         userIDField = lab.user_id;
-         // labDateField = lab.lab_date;
-         // labNameField = lab.lab_name;
-         // notesField = lab.notes;
-         window.location.replace('./create_lab?user_id=' + lab.user_id);
+     function createNew(procedure){
+         userIDField = procedure.user_id;
+         // procedureDateField = procedure.procedure_date;
+         // procedureNameField = procedure.procedure_name;
+         // notesField = procedure.notes;
+         window.location.replace('./create_procedure?user_id=' + procedure.user_id);
      }
  
-     function openEdit(lab){
-         labIDField = lab.lab_id;
-         userIDField = lab.user_id;
-         labDateField = lab.lab_date;
-         labNameField = lab.lab_name;
-         labValueField = lab.lab_value;
-         notesField = lab.notes;
+     function openEdit(procedure){
+         procedureIDField = procedure.procedure_id;
+         userIDField = procedure.user_id;
+         procedureDateField = procedure.procedure_date;
+         procedureNameField = procedure.procedure_name;
+         notesField = procedure.notes;
      }
      function modifyAccount(){
-         let lab = {
-            lab_id: labIDField,
+         let procedure = {
+            procedure_id: procedureIDField,
             user_id: userIDField,
-            lab_date: labDateField,
-            lab_name: labNameField,
-            lab_value: labValueField,
+            procedure_date: procedureDateField,
+            procedure_name: procedureNameField,
             notes: notesField
          };
      }
@@ -44,23 +41,22 @@
  </script>
  
    
- <div class="labs">
+ <div class="procedures">
      <div class="heading">
          <div class="intro">
-          <h3 class="center">Labs</h3>
+          <h3 class="center">Procedures</h3>
           <p>
-             Here you can view all of the lab Values you have recorded.
+             These are all of the procedures you have recorded.
           </p>
           <form>
-          <button formaction="/create_lab" class="button-primary">New</button>
+          <button formaction="/create_procedure" class="button-primary">New</button>
          </form>
          </div>
-         
      </div>  
        <div class="table">
        <table>
          <colgroup>
-             <col style= "width: 8em">
+             <col>
              <col>
              <col>
              <col>
@@ -69,8 +65,7 @@
            <thead>
              <tr>
                  <th scope="col" >Date</th>
-                 <th scope="col" >Lab Name</th>
-                 <th scope="col" >Lab Value</th>
+                 <th scope="col" >Procedure Name</th>
                  <th scope="col" >Notes</th>
                  <th scope="col" ></th>
              </tr>
@@ -78,39 +73,40 @@
           
            <tbody>
              
-             {#each labs as lab}
+             {#each procedures as procedure}
              <tr>
-                 <td>{lab.lab_date}</td>
-                 <td>{lab.lab_name}</td>
-                 <td>{lab.lab_value}</td>
-                <td>{lab.notes}</td>
-                 <td><button on:click={()=>openEdit(lab)} class="button-primary-edit">Edit</button></td>
-                 <!-- <td><button on:click={()=>createNew(lab)} class="button-primary-edit">New</button></td> -->
+                 <td>{procedure.procedure_date}</td>
+                 <td>{procedure.procedure_name}</td>
+                <td>{procedure.notes}</td>
+                 <td><button on:click={()=>openEdit(procedure)} class="button-primary-edit">Edit</button></td>
+                 <!-- <td><button on:click={()=>createNew(procedure)} class="button-primary-edit">New</button></td> -->
              </tr>
              {/each}
            </tbody>
          </table>
      </div>
      <div class="edit">
-         {#if labNameField}
-         <h3>Edit Lab</h3>
-         <form action="/labs?_method=PUT" method="POST">
+         {#if procedureNameField}
+         <h3>Edit procedure</h3>
+         <form action="/procedures?_method=PUT" method="POST">
              <fieldset>
-                 <input bind:value={labIDField} type="hidden" name="lab_id" id="labIdField">
+                 <input bind:value={procedureIDField} type="hidden" name="procedure_id" id="procedureIdField">
                  <label for="date">Date</label>
-                 <input  bind:value={labDateField} type="text" name="date" placeholder="Date" id="dateField">
-                 <label for="lab_name">Lab Name</label>
-                 <select  bind:value={labNameField} name="lab_name"  id="labNameField">
-                    <option value="">Select a lab</option>
-                    <option value="PSA">PSA</option>
-                    <option value="freePSA">Free PSA</option>
+                 <input  bind:value={procedureDateField} type="text" name="date" placeholder="Date" id="dateField">
+                 <label for="procedure_name">procedure Name</label>
+                 <select  bind:value={procedureNameField} name="procedure_name"  id="procedureNameField">
+                    <option value="">Select a Procedure</option>
+                    <option value="Prostate Biopsy">Prostate Biopsy</option>
+                    <option value="Prostatectomy - Open">Prostatectomy - Open</option>
+                    <option value="Prostatectomy - Robotic">Prostatectomy - Robotic</option>
+                    <option value="Prostatectomy - Salvage">Prostatectomy - Salvage</option>
+                    <option value="Radiation">Radiation</option>
+                    <option value="Cystoscopy">Cystoscopy</option>
                 </select>
-                 <label for="lab_value">Lab Value</label>
-                 <input  bind:value={labValueField} type="text" name="lab_value" placeholder="0.00" id="labValueField">
-                 <label for="lab_notes">Note</label>
+                 <label for="procedure_notes">Note</label>
                  <textarea bind:value={notesField} name="notes" id="" cols="30" rows="60"></textarea>
-               <button class="button-primary" type="submit" >Save Edited Lab</button>
-               <button formaction="/labs?_method=delete" class="button-primary-delete" type="submit">Delete Lab</button>
+               <button class="button-primary" type="submit" >Save Edited Procedure</button>
+               <button formaction="/labs?_method=delete" class="button-primary-delete" type="submit">Delete Procedure</button>
              </fieldset>
            </form>
          {/if}
@@ -120,7 +116,7 @@
  
  
    <style>
-     .labs {
+     .procedures {
          display: flex;
          flex-direction: column;
          align-items: center;
@@ -139,14 +135,7 @@
          padding: 2rem;
          width: 80%;
      }
-     /* .right{
-         padding: 2rem 4rem 2rem 4rem;
-     }
-     .button-create {
  
-         background-color: #FF7F00;
-         border: 0.1rem solid #FF7F00; 
-      }  */
       .button-create {
 
             background-color: #2e6adb;
@@ -216,14 +205,4 @@
        margin: 0rem 16rem 2rem;
  
  }
-   /*
-    The wrapper div needs to have an explicit width and height in CSS.
-    It can also be a flexbox child or CSS grid element.
-    The point being it needs dimensions since the <LayerCake> element will
-    expand to fill it.
-  */
-  .chart-container {
-    width: 100%;
-    height: 300px;
-  }
    </style>

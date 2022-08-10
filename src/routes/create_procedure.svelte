@@ -1,46 +1,53 @@
 <script >
 
-    export let visits;
-    export let doctor_name;
-    
-    export let visit_date;
+    export let procedures;
+    export let procedure_name;
+    export let procedure_date;
     export let notes;
     export let user_id;
 
 
 	
 	
-    function createNew(visit){
-        userIDField = visit.user_id;
-        drNameField = visit.doctor_name;
-        notesField = visit.notes;
-        dateField = visit.visit_date;
-        window.location.replace('./create_visit');
+    function createNew(procedure){
+        userIDField = procedure.user_id;
+        procedureNameField = procedure.procedure_name;
+        notesField = procedure.notes;
+        procedureDateField = procedure.procedure_date;
+        window.location.replace('./create_procedure');
     }
 </script>
 
 
 
-<div class="visits">
+<div class="procedures">
     <div class="create">
-        <h3>Enter New Clinic Visit</h3>
-        <form action="/create_visit" method="POST">
+        <h3>Enter New Clinic procedure</h3>
+        <form action="/create_procedure" method="POST">
             <fieldset>
                 <input bind:value={user_id} type="hidden" name="user_id" id="userIdField">
-                <label for="doctor_name">Dr. Name</label>
-                <input bind:value={doctor_name} name="doctor_name" id="drNameField">
                 <label for="date">Date</label>
-                <input  bind:value={visit_date} type="date" name="visit_date" placeholder="Date" id="dateField">
-                <label for="notes">Notes</label>
-                <textarea bind:value={notes} name="notes" id="" cols="30" rows="60"></textarea>
-                <button class="button-primary" type="submit" >Save Clinic Visit</button>
+                 <input  bind:value={procedure_date} type="date" name="date" placeholder="Date" id="dateField">
+                 <label for="procedure_name">Procedure Name</label>
+                 <select  bind:value={procedure_name} name="procedure_name"  id="procedureNameField">
+                    <option value="">Select a Procedure</option>
+                    <option value="Prostate Biopsy">Prostate Biopsy</option>
+                    <option value="Prostatectomy - Open">Prostatectomy - Open</option>
+                    <option value="Prostatectomy - Robotic">Prostatectomy - Robotic</option>
+                    <option value="Prostatectomy - Salvage">Prostatectomy - Salvage</option>
+                    <option value="Radiation">Radiation</option>
+                    <option value="Cystoscopy">Cystoscopy</option>
+                </select>
+                 <label for="procedure_notes">Note</label>
+                 <textarea bind:value={notes} name="notes" id="" cols="30" rows="60"></textarea>
+                <button class="button-primary" type="submit" >Save Procedure</button>
             </fieldset>
         </form>
     </div>
 </div>
 
 <style>
-    .visits {
+    .procedures {
         display: flex;
         flex-direction: column;
         align-items: center;

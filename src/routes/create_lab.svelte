@@ -1,46 +1,53 @@
 <script >
 
-    export let visits;
-    export let doctor_name;
-    
-    export let visit_date;
+    export let labs;
+    export let lab_name;
+    export let lab_date;
+    export let lab_value;
     export let notes;
     export let user_id;
 
 
 	
 	
-    function createNew(visit){
-        userIDField = visit.user_id;
-        drNameField = visit.doctor_name;
-        notesField = visit.notes;
-        dateField = visit.visit_date;
-        window.location.replace('./create_visit');
+    function createNew(lab){
+        userIDField = lab.user_id;
+        labNameField = lab.lab_name;
+        labValueField = lab.lab_value;
+        notesField = lab.notes;
+        labDateField = lab.lab_date;
+        window.location.replace('./create_lab');
     }
 </script>
 
 
 
-<div class="visits">
+<div class="labs">
     <div class="create">
-        <h3>Enter New Clinic Visit</h3>
-        <form action="/create_visit" method="POST">
+        <h3>Enter New Lab Value</h3>
+        <form action="/create_lab" method="POST">
             <fieldset>
                 <input bind:value={user_id} type="hidden" name="user_id" id="userIdField">
-                <label for="doctor_name">Dr. Name</label>
-                <input bind:value={doctor_name} name="doctor_name" id="drNameField">
                 <label for="date">Date</label>
-                <input  bind:value={visit_date} type="date" name="visit_date" placeholder="Date" id="dateField">
-                <label for="notes">Notes</label>
-                <textarea bind:value={notes} name="notes" id="" cols="30" rows="60"></textarea>
-                <button class="button-primary" type="submit" >Save Clinic Visit</button>
+                 <input  bind:value={lab_date} type="date" name="date" placeholder="Date" id="dateField">
+                 <label for="lab_name">Lab Name</label>
+                 <select  bind:value={lab_name} name="lab_name"  id="labNameField">
+                    <option value="">Select a lab</option>
+                    <option value="PSA">PSA</option>
+                    <option value="freePSA">Free PSA</option>
+                </select>
+                 <label for="lab_value">Lab Value</label>
+                 <input  bind:value={lab_value} type="text" name="lab_value" placeholder="0.00" id="labValueField">
+                 <label for="lab_notes">Note</label>
+                 <textarea bind:value={notes} name="notes" id="" cols="30" rows="60"></textarea>
+                <button class="button-primary" type="submit" >Save Lab</button>
             </fieldset>
         </form>
     </div>
 </div>
 
 <style>
-    .visits {
+    .labs {
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -28,6 +28,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"layercake": "^7.0.0",
 		"mysql": "^2.18.1",
 		"mysql2": "^2.3.3"
 	}
